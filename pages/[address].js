@@ -39,7 +39,7 @@ export default function Detail({Data, DonationsData}) {
       // fetch("https://gateway.pinata.cloud/ipfs/" + Data.storyUrl)
       //   .then((res) => res.text())
       //   .then((data) => (storyData = data));
-      setStory(Data.story)
+      setStory(Data.storyUrl)
       const MyDonations = contract.filters.donated(Address);
       const MyAllDonations = await contract.queryFilter(MyDonations);
 

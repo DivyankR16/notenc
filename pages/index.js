@@ -32,13 +32,13 @@ export default function Index({AllData, HealthData, EducationData,AnimalData}) {
       {filter.map((e) => {
         return (
           <Card key={e.title}>
-            <CardImg>
+            {/* <CardImg>
               <Image
                 alt="Crowdfunding dapp"
                 layout="fill"
                 src={"https://gateway.pinata.cloud/ipfs/" + e.image}
               />
-            </CardImg>
+            </CardImg> */}
             <Title>{e.title}</Title>
             <CardData>
               <Text>
@@ -183,43 +183,44 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
   width: 80%;
   margin-top: 25px;
-`
+  border-radius: 40px;
+`;
 const Card = styled.div`
   width: 30%;
   margin-top: 20px;
   background-color: ${(props) => props.theme.bgDiv};
-
-  &:hover{
+  border-radius: 40px;
+  &:hover {
     transform: translateY(-10px);
     transition: transform 0.5s;
   }
-  
-  &:not(:hover){
+
+  &:not(:hover) {
     transition: transform 0.5s;
   }
-`
+`;
 const CardImg = styled.div`
   position: relative;
   height: 120px;
   width: 100%;
 `
 const Title = styled.h2`
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 18px;
-  margin: 2px 0px;
+  margin: 8px 0px;
   background-color: ${(props) => props.theme.bgSubDiv};
-  padding: 5px;
+  padding: 15px;
   cursor: pointer;
   font-weight: normal;
-`
+`;
 const CardData = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 2px 0px;
+  margin: 8px 0px;
   background-color: ${(props) => props.theme.bgSubDiv};
-  padding: 5px;
+  padding: 15px;
   cursor: pointer;
-  `
+`;
 const Text = styled.p`
   display: flex;
   align-items: center;
@@ -233,14 +234,13 @@ const Button = styled.button`
   padding: 8px;
   text-align: center;
   width: 100%;
-  background-color:#00b712 ;
-  background-image:
-      linear-gradient(180deg, #00b712 0%, #5aff15 80%); 
+  background-color: red;
   border: none;
   cursor: pointer;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   text-transform: uppercase;
   color: #fff;
   font-size: 14px;
   font-weight: bold;
-`
+  padding: 15px;
+`;

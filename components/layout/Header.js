@@ -19,6 +19,8 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+  border-radius: 10px;
+  background-color: rgb(255, 255, 128);
+`;
 
 export default Header

@@ -296,19 +296,20 @@ const Image = styled.input`
 `
 
 const Button = styled.button`
-  display: flex;
-  justify-content:center;
-  width:100% ;
-  padding:15px ;
-  color:white ;
-  background-color:#00b712 ;
-  background-image:
-      linear-gradient(180deg, #00b712 0%, #5aff15 80%) ;
-  border:none;
-  margin-top:30px ;
+  display:flex;
+  text-align: center;
+  width: 100%;
+  background-color: red;
+  border: none;
   cursor: pointer;
-  font-weight:bold ;
-  font-size:large ;
+  font-family: "Roboto";
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 20px;
+  margin:30px;
+  border-radius:20px;
 `
 
 export default FormRightWrapper
