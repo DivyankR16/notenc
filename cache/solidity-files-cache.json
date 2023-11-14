@@ -1,0 +1,41 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\Divyank\\OneDrive\\Desktop\\PROJJJ\\notenc\\contracts\\Note.sol": {
+      "lastModificationDate": 1699956310131,
+      "contentHash": "804c4d1026088381608b3365dac458cd",
+      "sourceName": "contracts/Note.sol",
+      "solcConfig": {
+        "version": "0.8.10",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">0.7.0 <=0.9.0"
+      ],
+      "artifacts": [
+        "Note",
+        "NoteFactory"
+      ]
+    }
+  }
+}
