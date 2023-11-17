@@ -8,7 +8,7 @@ const HeaderNav = () => {
   return (
     <HeaderNavWrapper>
       <Link passHref href={'/'}><HeaderNavLinks active={Router.pathname === "/" ? true : false} >
-        User Notes
+        All Notes
       </HeaderNavLinks></Link>
       <Link passHref href={'/createnote'}><HeaderNavLinks active={Router.pathname === "/createnote" ? true : false} >
         Create Note

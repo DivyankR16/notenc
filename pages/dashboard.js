@@ -1,13 +1,6 @@
 import styled from 'styled-components';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import PaidIcon from '@mui/icons-material/Paid';
-import EventIcon from '@mui/icons-material/Event';
-import Image from 'next/image';
 import { ethers } from 'ethers';
 require('dotenv').config({ path: './.env.local' });
-import * as LitJsSdk from "@lit-protocol/lit-node-client";
-const axios = require("axios");
 // import CampaignFactory from '../artifacts/contracts/Campaign.sol/CampaignFactory.json'
 import NoteFactory from '../artifacts/contracts/Note.sol/NoteFactory.json'
 import { useEffect, useState } from 'react';
@@ -41,7 +34,6 @@ export default function Dashboard() {
         image: e.args.imgURI,
         owner: e.args.owner,
         timeStamp: parseInt(e.args.timestamp),
-        amount: ethers.utils.formatEther(e.args.requiredAmount),
         address: e.args.NoteAddress,
         story:e.args.story
       }
@@ -52,55 +44,38 @@ export default function Dashboard() {
   }, [])
   return (
     <HomeWrapper>
-
       {/* Cards Container */}
       <CardsWrapper>
-
-      {/* Card */}
-      {NotesData.map((e) => {
-        return (
-          <Card key={e.title}>
-            {/* <CardImg>
-              <Image
-                alt={decryptFile(e.image)[1] || ''}
-                layout="fill"
-                src={decryptFile(e.image)[0]|| ''}
-              />
-            </CardImg> */}
-            <Title>{e.title}</Title>
-            <CardData>
-              <Text>
-                Owner
-                <AccountBoxIcon />
-              </Text>
-              <Text>
-                {e.owner.slice(0, 6)}...{e.owner.slice(39)}
-              </Text>
-            </CardData>
-            <CardData>
-              <Text>
-                Amount
-                <PaidIcon />
-              </Text>
-              <Text>{e.amount} Matic</Text>
-            </CardData>
-            <CardData>
-              <Text>
-                <EventIcon />
-              </Text>
-              <Text>{new Date(e.timeStamp * 1000).toLocaleString()}</Text>
-            </CardData>
-            <Link passHref href={"/" + e.address}>
-              <Button>View Note</Button>
-            </Link>
-          </Card>
-        );
-      })}
         {/* Card */}
-
+        {NotesData.map((e) => {
+          return (
+            // <Content key={e.title}>
+            <Card_container key={e.title}>
+              <Card_body>
+                <Card_content>
+                  <Card_icon>{e.title}</Card_icon>
+                  <Card_author>
+                    {" "}
+                    {e.owner.slice(0, 6)}...{e.owner.slice(39)}
+                  </Card_author>
+                </Card_content>
+                <Card_meta>
+                  <Card_tag>
+                    {" "}
+                    <Link passHref href={"/" + e.address}>
+                      <Button>View Note</Button>
+                    </Link>
+                  </Card_tag>
+                </Card_meta>
+              </Card_body>
+            </Card_container>
+            // </Content>
+          );
+        })}
+        {/* Card */}
       </CardsWrapper>
     </HomeWrapper>
-  )
+  );
 }
 
 
@@ -120,51 +95,6 @@ const CardsWrapper = styled.div`
   margin-top: 25px;
   border-radius: 40px;
 `;
-const Card = styled.div`
-  width: 30%;
-  margin-top: 20px;
-  background-color: ${(props) => props.theme.bgDiv};
-  border-radius:40px;
-  &:hover{
-    transform: translateY(-10px);
-    transition: transform 0.5s;
-  }
-  
-  &:not(:hover){
-    transition: transform 0.5s;
-  }
-`
-const CardImg = styled.div`
-  position: relative;
-  height: 120px;
-  width: 100%;
-`
-const Title = styled.h2`
-  font-family: "Roboto";
-  font-size: 18px;
-  margin: 8px 0px;
-  background-color: ${(props) => props.theme.bgSubDiv};
-  padding: 15px;
-  cursor: pointer;
-  font-weight: normal;
-`;
-const CardData = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 8px 0px;
-  background-color: ${(props) => props.theme.bgSubDiv};
-  padding: 15px;
-  cursor: pointer;
-`;
-const Text = styled.p`
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto';
-  font-size: 18px;
-  font-weight: bold;
-`
 const Button = styled.button`
   padding: 8px;
   text-align: center;
@@ -178,4 +108,83 @@ const Button = styled.button`
   font-size: 14px;
   font-weight: bold;
   padding: 15px;
+`;
+const Card_container = styled.div`
+  background: #45d045;
+  background: ${(props) => props.theme.bgSubDiv};
+  width: 20em;
+  height: 25em;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1em;
+  margin:20px;
+`;
+const Card_body=styled.div`
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;`
+
+const Card_content = styled.div`
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+`
+const Card_meta = styled.div`
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0em 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+`
+const Card_title = styled.div`
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  margin: 0em 0em;
+  background-color: ${(props) => props.theme.bgSubDiv};
+  font-size: 1.75em;
+  line-height: 1.15em;
+`;
+const Card_icon = styled.div`
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  font-size: 30px;
+  font-weight: 700;
+  height: 25%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+`;
+const Card_author = styled.div`
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: ${(props) => props.theme.bgSubDiv};
+  font-size: 1em;
+  line-height: 1.15em;
+`;
+const Card_tag = styled.div`
+  font-family: "Open Sans", sans-serif;
+  margin: 2em 0em;
+  font-size: 0.75em;
+  background-color: ${(props) => props.theme.bgSubDiv};
+  line-height: 1.15em;
 `;

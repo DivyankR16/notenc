@@ -13,15 +13,14 @@ const Form = () => {
     const [form, setForm] = useState({
         NoteTitle: "",
         story: "",
-        requiredAmount: "",
-        category: "education",
+        category: "Urgent",
     });
 
     const [loading, setLoading] = useState(false);
     const [address, setAddress] = useState("");
     const [uploaded, setUploaded] = useState(false);
 
-    // const [storyUrl, setStoryUrl] = useState();
+    const [storyUrl, setStoryUrl] = useState();
     const [imageUrl, setImageUrl] = useState();
 
     const FormHandler = (e) => {
@@ -59,15 +58,12 @@ const Form = () => {
             NoteFactory.abi,
             signer
           );
-            
-          const CampaignAmount = ethers.utils.parseEther(form.requiredAmount);
     
           const NoteData = await contract.createNote(
             form.NoteTitle,
-            CampaignAmount,
             imageUrl,
             form.category,
-            form.story
+            storyUrl
           );
     
           await NoteData.wait();   
@@ -77,32 +73,44 @@ const Form = () => {
     }
 
   return (
-      <FormState.Provider value={{form, setForm, image, setImage, ImageHandler, FormHandler, setImageUrl, CreateNoteawaitfunc, setUploaded}} >
-    <FormWrapper>
+    <FormState.Provider
+      value={{
+        form,
+        setForm,
+        image,
+        setImage,
+        ImageHandler,
+        FormHandler,
+        setImageUrl,
+        CreateNoteawaitfunc,
+        setUploaded,
+        setStoryUrl,
+      }}
+    >
+      <FormWrapper>
         <FormMain>
-            {loading == true ?
-                address == "" ?
-                    <Spinner>
-                        <TailSpin height={60} />
-                    </Spinner> :
-                <Address>
-                    <h1>Note Created Sucessfully!</h1>
-                    <h1>{address}</h1>
-                    <Button>
-                        Go To Note
-                    </Button>
-                </Address>
-                :
-                    <FormInputsWrapper>
-                        <FormLeftWrapper />
-                        <FormRightWrapper />
-                    </FormInputsWrapper>               
-            }
+          {loading == true ? (
+            address == "" ? (
+              <Spinner>
+                <TailSpin height={60} />
+              </Spinner>
+            ) : (
+              <Address>
+                <h1>Note Created Sucessfully!</h1>
+                <h1>{address}</h1>
+              </Address>
+            )
+          ) : (
+            <FormInputsWrapper>
+              <FormLeftWrapper />
+              <FormRightWrapper />
+            </FormInputsWrapper>
+          )}
         </FormMain>
-          </FormWrapper>
-          <h1>{ imageUrl}</h1>
+      </FormWrapper>
+      {/* <h1>{imageUrl}</h1> */}
     </FormState.Provider>
-  )
+  );
 }
 
 const FormWrapper = styled.div`
