@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ethers } from 'ethers';
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
-require("dotenv").config({ path: "./.env.local" });
+// require("dotenv").config();
 import NoteFactory from '../artifacts/contracts/Note.sol/NoteFactory.json'
 import Note from '../artifacts/contracts/Note.sol/Note.json'
 import { useEffect, useState } from "react";

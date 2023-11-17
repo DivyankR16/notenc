@@ -1,14 +1,18 @@
-'use server'
 import styled from 'styled-components';
 import { FormState } from '../Form';
 import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner'
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
+import { ethers } from 'ethers';
 const axios = require("axios");
 const FormData = require("form-data");
 require("dotenv").config();
-const pinFileToIPFS = async (pak,psak,fileUpload,title) => {
+const pinFileToIPFS = async (pak, psak, fileUpload, title) => {
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+  const Web3provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = Web3provider.getSigner();
+  const Address = await signer.getAddress();
   try {
     let key1 = "407b7210ab9db99d8857";
     let key2 = "b0e474133f5e9732f1aa31231ddfdd6377880b4063c045ef7d9d6175afa229bf";
@@ -28,7 +32,7 @@ const pinFileToIPFS = async (pak,psak,fileUpload,title) => {
         parameters: [":userAddress",],
         returnValueTest: {
           comparator: "=",
-          value: "0x1457B2d38e38408A7B7916bD709fC2C2585a01aE",
+          value: Address,
         },
       },
     ];
@@ -69,6 +73,10 @@ const pinFileToIPFS = async (pak,psak,fileUpload,title) => {
 };
   const pinFileToIPFS1 = async (pak, psak, fileUpload, title) => {
     try {
+       await window.ethereum.request({ method: "eth_requestAccounts" });
+       const Web3provider = new ethers.providers.Web3Provider(window.ethereum);
+       const signer = Web3provider.getSigner();
+       const Address = await signer.getAddress();
       let key1 = "407b7210ab9db99d8857";
       let key2 ="b0e474133f5e9732f1aa31231ddfdd6377880b4063c045ef7d9d6175afa229bf";
       const litNodeClient = new LitJsSdk.LitNodeClient({
@@ -87,7 +95,7 @@ const pinFileToIPFS = async (pak,psak,fileUpload,title) => {
           parameters: [":userAddress"],
           returnValueTest: {
             comparator: "=",
-            value: "0x1457B2d38e38408A7B7916bD709fC2C2585a01aE",
+            value: Address,
           },
         },
       ];
